@@ -154,6 +154,26 @@
       <version>${jsp-api.version}</version>
       <scope>provided</scope>
     </dependency>
+    <!-- commons-logging  start 1.	添加短信平台的依赖包-->
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging-api</artifactId>
+      <version>1.1</version>
+    </dependency>
+
+    <!--httpclient支持-->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore</artifactId>
+      <version>4.4.10</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.6</version>
+    </dependency>
+
     <!-- 文件上传组件 -->
     <dependency>
       <groupId>commons-fileupload</groupId>

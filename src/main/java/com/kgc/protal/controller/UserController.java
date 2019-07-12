@@ -40,20 +40,28 @@ public class UserController {
 
     //通过用户名密码实现登入ss
     @RequestMapping("loginAction")
-    public String loginAction(String name, String password, Model model, HttpSession session) throws  Exception{
-        //调用业务实现注册
-        Users user=usersService.login(name,password);
-        if(user==null){
-            model.addAttribute("info","用户名和密码不正确");
-            return "login";
-        }else{
-            //只要登入，使用session作用域保存登入的人
-            session.setAttribute("loginInfo",user);
-            //设置保存的有效时间
-            session.setMaxInactiveInterval(600);  //以秒
+    public String loginAction(String veryCode,String name, String password, Model model, HttpSession session) throws  Exception{
+        String savecode=(String)session.getAttribute("saveCode");
+        if(veryCode.equals(savecode))
+        {
+            //调用业务实现注册
+            Users user=usersService.login(name,password);
+            if(user==null){
+                model.addAttribute("info","用户名和密码不正确");
+                return "login";
+            }else{
+                //只要登入，使用session作用域保存登入的人
+                session.setAttribute("loginInfo",user);
+                //设置保存的有效时间
+                session.setMaxInactiveInterval(6000);  //秒
 
-            return "redirect:getHouse";   //用户登入后的管理页
+                return "redirect:getHouse";   //用户登入后的管理页
+            }
+        }else{
+            model.addAttribute("info","验证码错误，获取过期");
+            return "login";
         }
+
     }
 
 }
